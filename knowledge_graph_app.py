@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 import streamlit as st
 from pyvis.network import Network
 import streamlit.components.v1 as components
