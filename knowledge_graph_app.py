@@ -16,6 +16,11 @@ api_key = st.secrets["OPENAI_API_KEY"]
 # Create the OpenAI client using the secret API key
 client = OpenAI(api_key=api_key)
 
+# api_key = "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"
+
+# Create the OpenAI client using the API key
+client = OpenAI(api_key=api_key)
+
 # Initialize session state for graph data
 if 'nodes' not in st.session_state:
     st.session_state['nodes'] = []
@@ -163,6 +168,7 @@ def render_static_community_section():
             border-radius: 10px;
             max-width: 400px;
             margin: 0 auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .community-header {
             display: flex;
@@ -174,70 +180,64 @@ def render_static_community_section():
             margin-bottom: 20px;
         }
         .community-icon {
-            width: 24px;
-            height: 24px;
+            width: 16px;
+            height: 16px;
             background-color: #ff0077;
             border-radius: 50%;
             display: inline-block;
         }
-        .community-card {
-            display: inline-block;
-            background-color: #ffca7d;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            color: #333;
+        .community-card, .community-event {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .community-card {
+            background-color: #ffca7d;
+            color: #333;
         }
         .community-event {
             background-color: #fe4880;
-            padding: 15px;
-            margin: 5px 0;
-            border-radius: 10px;
-            font-weight: bold;
             color: #fff;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
-        .community-icon {
+        .community-details {
             margin-left: 10px;
         }
         </style>
         
         <div class="community-container">
             <div class="community-header">
-                <div>Community</div>
+                <span>Community</span>
                 <div class="community-icon"></div>
             </div>
 
             <div class="community-card">
-                Intro to NLP
-                <span>👥 40 members</span>
+                <div>Intro to NLP</div>
+                <span class="community-details">👥 40 members</span>
             </div>
             <div class="community-card">
-                AI enthusiasts
-                <span>👥 +99 members</span>
+                <div>AI enthusiasts</div>
+                <span class="community-details">👥 +99 members</span>
             </div>
 
             <div class="community-event">
-                Getting into the world of NLP
-                <span>📅 Event - 20th Oct 2025 - 19:30 to 21:30</span>
+                <div>Getting into the world of NLP</div>
+                <span class="community-details">📅 20th Oct 2025 - 19:30 to 21:30</span>
             </div>
 
             <div class="community-card">
-                Influential people
-                <span>🌐</span>
+                <div>Influential people</div>
+                <span class="community-details">🌐</span>
             </div>
         </div>
         """,
         unsafe_allow_html=True
     )
+
 
 # Main function to run the app
 def main():
@@ -280,12 +280,12 @@ def main():
                 st.session_state['highlighted_path'] = suggested_nodes
                 render_styled_learning_path(suggested_nodes)
 
-        render_static_community_section()
 
 
         # Display chat history
         for message in st.session_state['messages']:
             st.write(f"**{message['role'].capitalize()}**: {message['content']}")
 
+        render_static_community_section()  
 if __name__ == "__main__":
     main()
