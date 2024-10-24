@@ -11,15 +11,11 @@ from openai import OpenAI
 # Set page configuration
 st.set_page_config(layout="wide")
 
-# Load environment variables from .env file
-load_dotenv()
+# Fetch the OpenAI API key from Streamlit secrets
+api_key = st.secrets["OPENAI_API_KEY"]
 
-# Fetch the OpenAI API key from environment variables
-api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    st.error("API key not found. Please set it as an environment variable.")
-else:
-    client = OpenAI(api_key=api_key)
+# Create the OpenAI client using the secret API key
+client = OpenAI(api_key=api_key)
 
 # Initialize session state for graph data
 if 'nodes' not in st.session_state:
