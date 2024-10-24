@@ -286,6 +286,6 @@ def main():
         for message in st.session_state['messages']:
             st.write(f"**{message['role'].capitalize()}**: {message['content']}")
 
-        render_static_community_section()  
+        # render_static_community_section()  
 if __name__ == "__main__":
     main()
