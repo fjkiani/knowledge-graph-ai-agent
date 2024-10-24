@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 import streamlit as st
 from pyvis.network import Network
 import streamlit.components.v1 as components
@@ -9,10 +11,15 @@ from openai import OpenAI
 # Set page configuration
 st.set_page_config(layout="wide")
 
-# Set your OpenAI API key
-client = OpenAI(
-    api_key="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",
-)
+# Load environment variables from .env file
+load_dotenv()
+
+# Fetch the OpenAI API key from environment variables
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    st.error("API key not found. Please set it as an environment variable.")
+else:
+    client = OpenAI(api_key=api_key)
 
 # Initialize session state for graph data
 if 'nodes' not in st.session_state:
