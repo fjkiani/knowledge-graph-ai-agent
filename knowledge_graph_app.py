@@ -16,7 +16,7 @@ api_key = st.secrets["OPENAI_API_KEY"]
 # Create the OpenAI client using the secret API key
 client = OpenAI(api_key=api_key)
 
-# api_key = "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"
+# api_key = 
 
 # Create the OpenAI client using the API key
 client = OpenAI(api_key=api_key)
